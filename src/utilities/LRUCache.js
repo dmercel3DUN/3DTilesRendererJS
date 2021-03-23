@@ -10,8 +10,8 @@ class LRUCache {
 	constructor() {
 
 		// options
-		this.maxSize = 800;
-		this.minSize = 600;
+		this.maxSize = 200;
+		this.minSize = 100;
 		this.unloadPercent = 0.05;
 
 		// "itemSet" doubles as both the list of the full set of items currently
