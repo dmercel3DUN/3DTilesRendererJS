@@ -16,6 +16,7 @@ import {
 } from 'three';
 import { raycastTraverse, raycastTraverseFirstHit } from './raycastTraverse.js';
 
+//Variables
 const INITIAL_FRUSTUM_CULLED = Symbol( 'INITIAL_FRUSTUM_CULLED' );
 const DEG2RAD = MathUtils.DEG2RAD;
 const tempMat = new Matrix4();
@@ -28,6 +29,7 @@ const vecZ = new Vector3();
 const X_AXIS = new Vector3( 1, 0, 0 );
 const Y_AXIS = new Vector3( 0, 1, 0 );
 
+//Functions
 function emptyRaycast() {}
 
 function updateFrustumCulled( object, toInitialValue ) {

@@ -12,7 +12,7 @@ class LRUCache {
 		// options
 		this.maxSize = 200;
 		this.minSize = 100;
-		this.unloadPercent = 0.05;
+		this.unloadPercent = 0.5;
 
 		// "itemSet" doubles as both the list of the full set of items currently
 		// stored in the cache (keys) as well as a map to the time the item was last
