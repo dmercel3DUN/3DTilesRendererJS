@@ -68,7 +68,7 @@ let params = {
 	'colorMode': 0,
 	'showThirdPerson': false,
 	'showSecondView': false,
-	'reload': reinstantiateTiles,
+	'reload': reinstantiateTiles
 
 };
 
@@ -77,7 +77,23 @@ animate();
 
 function reinstantiateTiles() {
 
-	const url = hashUrl || 'https://3d-tile-test.s3-eu-west-1.amazonaws.com/LARGE_BICESTER/ScansImage_01.json';
+	//const url = hashUrl || 'https://3d-tile-test.s3-eu-west-1.amazonaws.com/LARGE_BICESTER/ScansImage_01.json';
+	//const url = hashUrl || 'https://3d-tile-test.s3-eu-west-1.amazonaws.com/360/BIC_TX.json';
+	//const url = hashUrl || 'https://2-3dun-eu-west-2.s3.eu-west-2.amazonaws.com/3dusernet-1620909147-conversions/9b490126-dbb3-4bea-9ccd-00420dd40896/output/tileset_Drevopal.json';
+	//const url = hashUrl || 'https://2-3dun-eu-west-2.s3.eu-west-2.amazonaws.com/3dusernet-1620909147-conversions/abf59f79-f57a-4333-956e-b7349e2066bf/output/tileset_Set2_02.json';
+
+	//Synergy Test (Out of DJITerra as OBJ converted by UltraMesh)
+	//const url = hashUrl || 'https://2-3dun-eu-west-2.s3.eu-west-2.amazonaws.com/3dusernet-1620909147-conversions/556bd0ec-04c7-4ebc-aab1-6cf4061b2fa6/output/tileset.json';
+	//Synergy Test (Out of DJITerra as 3DTiles)
+	//const url = hashUrl || 'https://2-3dun-ap-southeast-2.s3.ap-southeast-2.amazonaws.com/synergyaccesssolutions-1635848307-conversions/cbfe0e3b-0ba5-447d-a608-831c01cf8259/output/tileset.json';
+	//const url = hashUrl || 'https://md-lambda-testbucket.s3-eu-west-1.amazonaws.com/360_2/MESH/output/Goods_Shed_2.json';
+	//Drevopal with GZip Compression
+	//const url = hashUrl || 'https://2-3dun-us-west-1.s3.us-west-1.amazonaws.com/ehsancompany-1535628672-conversions-dev/f3878b82-73db-4a05-bbbe-64b951a334cf/output/Drevopal_Small/Drevopal.json';
+	//Melbourne Test with Draco Compression
+	//const url = hashUrl || 'https://2-3dun-eu-west-2.s3.eu-west-2.amazonaws.com/3dusernet-1620909147-conversions/cb0c7dcf-be5c-433a-9c79-a029e0895012/output/tileset.json';
+
+	//LansDep Test (KHR_Materials_Unlit but No Draco Compression)
+	const url = hashUrl || 'https://2-3dun-eu-west-2.s3.eu-west-2.amazonaws.com/3dusernet-1620909147-conversions/a289b1b0-4e73-44a7-b7fe-be29c1783861/output/11-NE-17B/tileset.json';
 
 	if ( tiles ) {
 
@@ -234,7 +250,7 @@ function init() {
 	tileOptions.add( params, 'displayActiveTiles' );
 	tileOptions.add( params, 'errorTarget' ).min( 0 ).max( 50 );
 	tileOptions.add( params, 'errorThreshold' ).min( 0 ).max( 1000 );
-	tileOptions.add( params, 'maxDepth' ).min( 1 ).max( 100 );
+	tileOptions.add( params, 'maxDepth' ).min( 1 ).max( 50000 );
 	tileOptions.add( params, 'up', [ '+Y', '+Z', '-Z' ] );
 	tileOptions.open();
 
@@ -249,7 +265,7 @@ function init() {
 		DEPTH,
 		RELATIVE_DEPTH,
 		IS_LEAF,
-		RANDOM_COLOR,
+		RANDOM_COLOR
 
 	} );
 	debug.open();
@@ -440,7 +456,8 @@ function animate() {
 
 	// update options
 	tiles.errorTarget = params.errorTarget;
-	tiles.errorThreshold = params.errorThreshold;
+	//tiles.errorThreshold = params.errorThreshold;
+	tiles.errorThreshold = Infinity;
 	tiles.loadSiblings = params.loadSiblings;
 	tiles.stopAtEmptyTiles = params.stopAtEmptyTiles;
 	tiles.displayActiveTiles = params.displayActiveTiles;
