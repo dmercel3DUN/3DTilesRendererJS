@@ -283,6 +283,7 @@ export class TilesRendererBase {
 
 	loadRootTileSet( url ) {
 
+		//console.log( 'Loading Root Tile' );
 		const tileSets = this.tileSets;
 		if ( ! ( url in tileSets ) ) {
 
@@ -319,6 +320,7 @@ export class TilesRendererBase {
 
 	requestTileContents( tile ) {
 
+		//console.log( 'Getting Tile Contents' );
 		// If the tile is already being loaded then don't
 		// start it again.
 		if ( tile.__loadingState !== UNLOADED ) {

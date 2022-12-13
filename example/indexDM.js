@@ -31,6 +31,9 @@ import { FlyOrbitControls } from './FlyOrbitControls.js';
 import { BufferGeometryUtils } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
+//DM- KTX2.0
+import { KTX2Loader } from 'three/examples/jsm/loaders/KTX2Loader.js';
+
 import * as dat from 'three/examples/jsm/libs/dat.gui.module.js';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 
@@ -90,10 +93,10 @@ function reinstantiateTiles() {
 	//Drevopal with GZip Compression
 	//const url = hashUrl || 'https://2-3dun-us-west-1.s3.us-west-1.amazonaws.com/ehsancompany-1535628672-conversions-dev/f3878b82-73db-4a05-bbbe-64b951a334cf/output/Drevopal_Small/Drevopal.json';
 	//Melbourne Test with Draco Compression
-	//const url = hashUrl || 'https://2-3dun-eu-west-2.s3.eu-west-2.amazonaws.com/3dusernet-1620909147-conversions/cb0c7dcf-be5c-433a-9c79-a029e0895012/output/tileset.json';
+	const url = hashUrl || 'https://2-3dun-eu-west-2.s3.eu-west-2.amazonaws.com/3dusernet-1620909147-conversions/cb0c7dcf-be5c-433a-9c79-a029e0895012/output/tileset.json';
 
 	//LansDep Test (KHR_Materials_Unlit but No Draco Compression)
-	const url = hashUrl || 'https://2-3dun-eu-west-2.s3.eu-west-2.amazonaws.com/3dusernet-1620909147-conversions/a289b1b0-4e73-44a7-b7fe-be29c1783861/output/11-NE-17B/tileset.json';
+	//const url = hashUrl || 'https://2-3dun-eu-west-2.s3.eu-west-2.amazonaws.com/3dusernet-1620909147-conversions/a289b1b0-4e73-44a7-b7fe-be29c1783861/output/11-NE-17B/tileset.json';
 
 	if ( tiles ) {
 
@@ -109,11 +112,22 @@ function reinstantiateTiles() {
 	const dracoLoader = new DRACOLoader();
 	dracoLoader.setDecoderPath( 'https://unpkg.com/three@0.123.0/examples/js/libs/draco/gltf/' );
 
+	//DM -Loading the KTX2.0 Loader as well
+	const ktx2Loader = new KTX2Loader();
+	ktx2Loader.setTranscoderPath( 'https://unpkg.com/browse/three@0.123.0/examples/js/libs/basis/' );
+	//ktx2Loader.detectSupport( tiles );
+
+
 	const loader = new GLTFLoader( tiles.manager );
 	loader.setDRACOLoader( dracoLoader );
+	//DM - KTX2.0
+	ktx2Loader.manager = tiles.manager;
+	loader.setKTX2Loader( ktx2Loader );
 
 	tiles.fetchOptions.mode = 'cors';
 	tiles.manager.addHandler( /\.gltf$/, loader );
+	//DM - Add GLB type as well
+	tiles.manager.addHandler( /\glb$/, loader );
 	offsetParent.add( tiles.group );
 
 }
